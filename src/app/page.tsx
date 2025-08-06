@@ -19,10 +19,9 @@ export default function LandingPage() {
     }, [scrollTo])
     return (
         <div>
-            irgrhoghirhgo
             <section id="landing-section">
-                <div className="grid grid-cols-2 place-items-center max-w-7xl mx-auto min-h-screen px-4">
-                    <div className="text-left space-y-6">
+                <div className="flex justify-around items-center mx-32  max-w-full min-h-screen">
+                    <div className="text-left w-3xl space-y-6">
                         <h1 className="text-5xl font-extrabold leading-tight"> A platform where creators and organizations connect, collaborate, and thrive.</h1>
                         <p className="text-3xl font-bold text-gray-600 max-w-md">Connect. Collaborate. Create. <br /> <br /></p>
                     </div>
