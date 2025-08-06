@@ -1,95 +1,45 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+"use client";
 
-export default function Home() {
-  return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>src/app/page.tsx</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+import Pen from "./components/ui/Pen";
+import Paper from "./components/ui/Paper";
+import { useSearchParams } from "next/navigation";
+import { useEffect } from "react";
+import Card from "./components/ui/Card";
 
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
+export default function LandingPage() {
+    const searchParam = useSearchParams();
+    const scrollTo = searchParam.get('scrollTo');
+    useEffect(() => {
+        if(scrollTo) {
+            const section = document.getElementById(scrollTo);
+            if(section) {
+                section.scrollIntoView({behavior:'smooth'});
+            }
+        }
+    }, [scrollTo])
+    return (
+        <div>
+            <section id="landing-section">
+                <div className="grid grid-cols-2 place-items-center max-w-7xl mx-auto min-h-screen px-4">
+                    <div className="text-left space-y-6">
+                        <h1 className="text-5xl font-extrabold leading-tight"> A platform where creators and organizations connect, collaborate, and thrive.</h1>
+                        <p className="text-3xl font-bold text-gray-600 max-w-md">Connect. Collaborate. Create. <br /> <br /></p>
+                    </div>
+                    <div className="flex">
+                        <Paper />
+                        <Pen />
+                    </div>
+                </div>
+            </section>
+            <section id="home-section">
+                <div className="grid grid-cols-3 place-items-center max-w-full mx-auto min-h-screen py-10">
+                    <Card />
+                    <Card />
+                    <Card />
+                    <Card />
+                </div>
+                
+            </section>
         </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+    );
 }
