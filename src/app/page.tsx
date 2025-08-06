@@ -16,11 +16,10 @@ export default function LandingPage() {
                 section.scrollIntoView({behavior:'smooth'});
             }
         }
-    }, [scrollTo]);
-
+    }, [scrollTo])
     return (
         <div>
-        otha
+            irgrhoghirhgo
             <section id="landing-section">
                 <div className="grid grid-cols-2 place-items-center max-w-7xl mx-auto min-h-screen px-4">
                     <div className="text-left space-y-6">
