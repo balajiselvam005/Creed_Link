@@ -22,7 +22,6 @@ export default function LandingPage() {
   return (
     <div>
       {/* Hero Section */}
-      anfajnfna
       <section id="landing-section" className="px-4 sm:px-8 lg:px-16 xl:px-32">
         <div className="flex flex-col lg:flex-row justify-center lg:justify-around items-center max-w-full min-h-screen py-8 lg:py-0 gap-8 lg:gap-4">
           {/* Text Content */}
