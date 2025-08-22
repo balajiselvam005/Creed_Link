@@ -1,1 +1,23 @@
 @import "tailwindcss";
+
+@layer components {
+  /* Primary heading for hero/section titles */
+  .heading-primary {
+    @apply text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold leading-tight;
+  }
+
+  /* Secondary heading for taglines/subtitles */
+  .heading-sub {
+    @apply text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-gray-600;
+  }
+
+  /* Paragraph text for normal content */
+  .body-text {
+    @apply text-base sm:text-lg text-gray-700 leading-relaxed;
+  }
+
+  /* Highlight text for emphasis */
+  .highlight-text {
+    @apply text-blue-600 font-semibold;
+  }
+}

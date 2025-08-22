@@ -8,6 +8,9 @@ const config: Config = {
         mono: ['var(--font-geist-mono)', 'monospace'],
         apple: ['var(--font-homemade-apple)', 'cursive'],
       },
+      colors: {
+        background: "#9CA3AF",
+      }
     },
   },
   content: [

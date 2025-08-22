@@ -1,9 +1,9 @@
 "use client";
-import Pen from "./components/ui/Pen";
-import Paper from "./components/ui/Paper";
+import Pen from "../components/ui/pen";
+import Paper from "../components/ui/paper";
 import { useSearchParams } from "next/navigation";
 import { useEffect } from "react";
-import Card from "./components/ui/Card";
+import Card from "../components/ui/card";
 import { Link, ArrowRight } from "lucide-react";
 
 export default function LandingPage() {
@@ -26,10 +26,10 @@ export default function LandingPage() {
         <div className="flex flex-col lg:flex-row justify-center lg:justify-around items-center max-w-full min-h-screen py-8 lg:py-0 gap-8 lg:gap-4">
           {/* Text Content */}
           <div className="text-center lg:text-left w-full lg:w-auto max-w-4xl lg:max-w-3xl space-y-4 sm:space-y-6 order-2 lg:order-1">
-            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold leading-tight">
+            <h1 className="heading-primary">
               A platform where creators and organizations connect, collaborate, and thrive.
             </h1>
-            <p className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-gray-600 max-w-full lg:max-w-md mx-auto lg:mx-0">
+            <p className="heading-sub">
               Connect. Collaborate. Create.
             </p>
           </div>

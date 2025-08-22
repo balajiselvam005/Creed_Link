@@ -8,6 +8,5 @@ export default function Pen() {
                 <div className="absolute -top-[18px] left-1/2 transform -translate-x-1/2 w-[4px] h-[4px] rounded-full bg-black"></div>   
             </div>
         </div>  
-
     );
 }

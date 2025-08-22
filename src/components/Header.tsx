@@ -1,16 +1,17 @@
 "use client";
 import Link from "next/link";
-import { Bell, User, Loader, Users, Home, Search, Menu, X } from "lucide-react";
-import { useEffect, useState } from "react";
+import { User, Users, Home, Search, Menu, X, ArrowLeft } from "lucide-react";
+import { useState } from "react";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { useRouter } from "next/navigation";
+import { Button } from "./ui/button";
 
 const Header = () => {
-  const [currentDate, setCurrentDate] = useState("");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathName = usePathname();
   const isCreatorsPage = pathName === "/creators";
+  const isAuthPage = pathName === "/auth";
   const router = useRouter();
 
   const goToHomeSection = (sectionId: string) => {
@@ -18,28 +19,42 @@ const Header = () => {
     setIsMobileMenuOpen(false); // Close mobile menu after navigation
   };
 
-  useEffect(() => {
-    const updateDate = () => {
-      const now = new Date();
-      const options: Intl.DateTimeFormatOptions = {
-        weekday: "short",
-        day: "2-digit",
-        month: "short",
-      };
-      setCurrentDate(now.toLocaleDateString("en-IN", options));
-    };
-    updateDate();
-    const interval = setInterval(updateDate, 60000);
-    return () => clearInterval(interval);
-  }, []);
+  const goToAuthPage = (isLogin: boolean) => {
+    router.push(`/auth?mode=${isLogin ? "login" : "signup"}`);
+  }
+
+  if (isAuthPage) {
+    return (
+      <header className="bg-gray-400 p-4 sm:p-6">
+        <div className="max-w-screen mx-auto flex justify-between items-center">
+          <Link
+            href="/"
+            className="text-[clamp(1rem,5vw,2rem)] pl-20 font-bold tracking-tight hover:opacity-80 transition"
+          >
+            Creed Link
+          </Link>
+          <div className="flex hover:text-gray-700 pr-20 transition hover:shadow-2xl hover:-translate-y-1">
+            <ArrowLeft />
+            <Link
+              href="/"
+              className="text-sm sm:text-base underline"
+            >
+              Back to Home
+            </Link>
+          </div>
+
+        </div>
+      </header>
+    );
+  }
 
   return (
     <header className="bg-gray-400 p-4 sm:p-6 lg:p-10 transition-all">
       <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8">
         <div className="flex justify-between items-center">
           {/* Logo */}
-          <button 
-            onClick={() => goToHomeSection('landing-section')} 
+          <button
+            onClick={() => goToHomeSection('landing-section')}
             className="text-xl sm:text-2xl lg:text-3xl font-semibold whitespace-nowrap"
           >
             Creed Link
@@ -47,8 +62,8 @@ const Header = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex rounded-4xl p-3 xl:p-5 space-x-4 xl:space-x-8 border shadow-2xl overflow-hidden">
-            <button 
-              onClick={() => goToHomeSection('home-section')} 
+            <button
+              onClick={() => goToHomeSection('home-section')}
               className="flex items-center space-x-2 hover:underline transition-all"
             >
               <Home size={20} />
@@ -81,15 +96,14 @@ const Header = () => {
 
           {/* Right side items */}
           <div className="flex items-center space-x-2 sm:space-x-4">
-            {/* Notification with Date - Hidden on small screens */}
-            <div className="hidden sm:flex items-center border rounded-4xl p-2 sm:p-3 lg:p-4 space-x-2">
-              <Bell size={20} />
-              <div className="min-w-[60px] sm:min-w-[80px] text-center text-xs sm:text-sm">
-                {currentDate ? currentDate : <Loader className="animate-spin" size={16} />}
-              </div>
-            </div>
+            <Button elevate={true} size={"sm"} variant={"ghost"} onClick={() => goToAuthPage(true)}>
+              Login
+            </Button>
+            <Button elevate={true} size={"sm"} variant={"ghost"} onClick={() => goToAuthPage(false)}>
+              Sign Up
+            </Button>
 
-            {/* User Icon */}
+            {/* User Icon  OR Login and Sign up button */}
             <div className="border rounded-full p-2">
               <User size={20} />
             </div>
@@ -111,50 +125,42 @@ const Header = () => {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
-              className="lg:hidden mt-4 bg-white rounded-lg shadow-lg overflow-hidden"
+              className="absolute right-13 lg:hidden mt-4 w-35 bg-gray-300 rounded-lg shadow-lg overflow-hidden"
             >
               <div className="py-2">
-                <button 
-                  onClick={() => goToHomeSection('home-section')} 
-                  className="flex items-center space-x-3 w-full px-4 py-3 hover:bg-gray-100 transition-colors"
+                <button
+                  onClick={() => goToHomeSection('home-section')}
+                  className="flex justify-end space-x-3 w-full px-4 py-3 hover:bg-gray-100 transition-colors"
                 >
-                  <Home size={20} />
                   <span>Home</span>
+                  <Home size={20} />
                 </button>
-                <Link 
-                  href='/creators' 
-                  className="flex items-center space-x-3 w-full px-4 py-3 hover:bg-gray-100 transition-colors"
+                <Link
+                  href='/creators'
+                  className="flex justify-end space-x-3 w-full px-4 py-3 hover:bg-gray-100 transition-colors"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
-                  <Users size={20} />
                   <span>Creators</span>
+                  <Users size={20} />
                 </Link>
                 {isCreatorsPage && (
-                  <Link 
-                    href='/search' 
-                    className="flex items-center space-x-3 w-full px-4 py-3 hover:bg-gray-100 transition-colors"
+                  <Link
+                    href='/search'
+                    className="flex justify-end space-x-3 w-full px-4 py-3 hover:bg-gray-100 transition-colors"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
-                    <Search size={20} />
                     <span>Search</span>
+                    <Search size={20} />
                   </Link>
                 )}
-                <Link 
-                  href='/templates' 
-                  className="flex items-center space-x-3 w-full px-4 py-3 hover:bg-gray-100 transition-colors"
+                <Link
+                  href='/templates'
+                  className="flex justify-end space-x-3 w-full px-4 py-3 hover:bg-gray-100 transition-colors"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
-                  <Menu size={20} />
                   <span>Templates</span>
+                  <Menu size={20} />
                 </Link>
-                
-                {/* Mobile Date Display */}
-                <div className="flex items-center justify-center space-x-2 px-4 py-3 border-t">
-                  <Bell size={20} />
-                  <div className="text-sm">
-                    {currentDate ? currentDate : <Loader className="animate-spin" size={16} />}
-                  </div>
-                </div>
               </div>
             </motion.nav>
           )}
